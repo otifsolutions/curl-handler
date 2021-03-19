@@ -1,0 +1,19 @@
+{
+    "name": "otifsolutions/curl-handler",
+    "description": "This package provides a eaisy access to api data in the project by simply giving the method,url and parameters",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "Otif Solutions",
+        "email": "contact@otif-solutions.com"
+      }
+    ],
+    "autoload": {
+      "psr-4": {
+        "OTIFSolutions\\CurlHandler\\": "src/"
+      }
+    },
+  
+    "require": {}
+  }
