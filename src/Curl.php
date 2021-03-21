@@ -3,7 +3,10 @@
 namespace OTIFSolutions\CurlHandler;
 use OTIFSolutions\CurlHanlder\Exceptions\CurlException;
 
-
+/**
+ * Class Curl
+ * @package OTIFSolutions\CurlHandler
+ */
 class Curl
 {
     /**
@@ -23,7 +26,6 @@ class Curl
             public function __construct(){
                 $this->curl = curl_init();
             }
-
             public function __get($method): object
             {
                 if ($method === 'GET'){
@@ -43,12 +45,10 @@ class Curl
                 }
                 return $this;
             }
-
-          
             /**
              * @param mixed $func
              * @param mixed $arguement
-             * 
+             *
              * @return object
              */
             public function __call($func,$arguement): object
@@ -73,10 +73,9 @@ class Curl
                     return $this;
                 }
             }
-
             /**
              * @param mixed $url
-             * 
+             *
              * @return object
              */
             private function url($url): object
@@ -89,11 +88,9 @@ class Curl
                 }
                 return $this;
             }
-
-          
             /**
              * @param mixed $headers
-             * 
+             *
              * @return object
              */
             private function header($headers): object
@@ -111,16 +108,13 @@ class Curl
                 }
                 return $this;
             }
-
-           
             /**
              * @param mixed $bodies
-             * 
+             *
              * @return object
              */
             private function body($bodies): object
             {
-
                 if(isset($bodies[0]) && gettype($bodies[0]) === 'array'){
                     $this->bodies;
                     if(count($bodies[0])>0){
@@ -132,15 +126,13 @@ class Curl
                 }
                 return $this;
             }
-
             /**
              * @param mixed $params
-             * 
+             *
              * @return object
              */
             private function params($params): object
             {
-
                 if(isset($params[0]) && gettype($params[0]) === 'array'){
                     $this->params;
                     if(count($params[0])>0){
@@ -153,14 +145,11 @@ class Curl
                 }
                 return $this;
             }
-
-        
             /**
              * @return object
              */
             private function execute(): object
             {
-
                 if(count($this->errors) ==0){
                     curl_setopt_array ( $this->curl, [
                         CURLOPT_URL => $this->url.($this->params?'?'.$this->params:''),
@@ -174,19 +163,15 @@ class Curl
                         if (curl_error($this->curl)){
                             $this->errors[] = 'Internal error occured';
                         }
-                      
                     return response($response);
                 }
-
                 else{
                     throw new CurlException($this->errors);
                 }
-
             }
             public function __destruct(){
                 curl_close($this->curl);
             }
-
         };
     }
 }

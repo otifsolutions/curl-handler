@@ -2,12 +2,17 @@
 
 namespace OTIFSolutions\CurlHandler;
 namespace OTIFSolutions\CurlHandler\Exceptions;
-
 use Throwable;
 
+/**
+ * Class CurlException
+ * @package OTIFSolutions\CurlHandler\Exceptions
+ */
 class CurlException extends \Exception{
+    /**
+     * @var array
+     */
     private $curlErrors;
-
     /**
      * CurlException constructor.
      * @param array $curlErrors
@@ -20,6 +25,7 @@ class CurlException extends \Exception{
         $this->curlErrors = $curlErrors;
         parent::__construct($message, $code, $previous);
     }
+
     /**
      * @return array
      */
