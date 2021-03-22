@@ -1,7 +1,7 @@
 <?php
 
 namespace OTIFSolutions\CurlHandler;
-use OTIFSolutions\CurlHanlder\Exceptions\CurlException;
+use OTIFSolutions\CurlHandler\Exceptions\CurlException;
 
 /**
  * Class Curl
