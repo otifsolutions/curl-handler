@@ -162,8 +162,9 @@ class Curl
                     $response = curl_exec($this->curl);
                         if (curl_error($this->curl)){
                             $this->errors[] = 'Internal error occured';
+                            throw new CurlException($this->errors)
                         }
-                    return response($response);
+                    return $response;
                 }
                 else{
                     throw new CurlException($this->errors);
