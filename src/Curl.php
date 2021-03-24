@@ -155,7 +155,7 @@ class Curl
                         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                         CURLOPT_CUSTOMREQUEST => $this->method,
                         CURLOPT_HTTPHEADER => $this->headers ?? [],
-                        CURLOPT_POSTFIELDS => json_encode($this->bodies) ?? [],
+                        CURLOPT_POSTFIELDS => $this->bodies ? json_encode($this->bodies) : [],
                     ]);
                     $response = curl_exec($this->curl);
                         if (curl_error($this->curl)){
