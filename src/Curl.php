@@ -145,10 +145,8 @@ class Curl
                 }
                 return $this;
             }
-            /**
-             * @return object
-             */
-            private function execute(): object
+            
+            private function execute()
             {
                 if(count($this->errors) ==0){
                     curl_setopt_array ( $this->curl, [
