@@ -49,9 +49,9 @@ class Curl
              * @param mixed $func
              * @param mixed $arguement
              *
-             * @return object
+             * @return mixed
              */
-            public function __call($func,$arguement): object
+            public function __call($func,$arguement)
             {
                 if($func === 'url'){
                     return $this->url($arguement);
@@ -145,8 +145,8 @@ class Curl
                 }
                 return $this;
             }
-            
-            private function execute()
+
+            private function execute() : array
             {
                 if(count($this->errors) ==0){
                     curl_setopt_array ( $this->curl, [
@@ -162,7 +162,7 @@ class Curl
                             $this->errors[] = 'Internal error occured';
                             throw new CurlException($this->errors);
                         }
-                    return $response;
+                    return json_decode($response,true,512,JSON_THROW_ON_ERROR);
                 }
                 else{
                     throw new CurlException($this->errors);
