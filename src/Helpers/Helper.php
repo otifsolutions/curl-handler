@@ -30,9 +30,9 @@ class Helper
 
     /**
      * @param $node
-     * @return array
+     * @return mixed
      */
-    public static  function domToArray($node): array {
+    public static  function domToArray($node) {
         $output = [];
         if (is_string($node)){
             $xml = new \DOMDocument();
