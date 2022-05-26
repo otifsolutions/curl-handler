@@ -15,7 +15,11 @@ class Helper
     public static function isJson($string): bool
     {
         json_decode($string);
-        return (json_last_error() == JSON_ERROR_NONE);
+        try{
+            return (json_last_error() == JSON_ERROR_NONE);
+        }catch (\Exception $ex){
+            return FALSE;
+        }
     }
 
     /**
@@ -25,7 +29,11 @@ class Helper
     public static  function isDomDocument($string): bool
     {
         $xml = new \DOMDocument();
-        return $xml->loadXML($string) !== FALSE;
+        try{
+            return $xml->loadXML($string) !== FALSE;
+        }catch (\Exception $ex){
+            return FALSE;
+        }
     }
 
     /**
