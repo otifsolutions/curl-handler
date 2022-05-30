@@ -1,6 +1,5 @@
 <?php
 
-namespace OTIFSolutions\CurlHandler;
 namespace OTIFSolutions\CurlHandler\Exceptions;
 use Throwable;
 
