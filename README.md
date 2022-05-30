@@ -13,7 +13,7 @@ Install via Composer **[Composer](https://getcomposer.org/download)** (Recommend
 __Using Composer (Recommended)__
 
 ```
-Composer require otifsolutions/curl-handler
+composer require otifsolutions/curl-handler
 ```
 
 
@@ -60,13 +60,13 @@ use OTIFSolutions\CurlHandler\Exceptions\CurlException;
 
 try{
 
-Curl::Make()
-    ->get() // this could be, get, post, put, delete
-    ->url('REQUEST_URL_GOES_HERE')
-    ->header(['AUTHENTICATION_ARRAY_GOES_HERE'])
-    ->body(['BODY_ARRAY_GOES_HERE'])
-    ->params(['PARAMETERS_ARRAY_GOES_HERE'])
-    ->execute();
+    Curl::Make()
+        ->get() // this could be, get, post, put, delete
+        ->url('REQUEST_URL_GOES_HERE')
+        ->header(['AUTHENTICATION_ARRAY_GOES_HERE'])
+        ->body(['BODY_ARRAY_GOES_HERE'])
+        ->params(['PARAMETERS_ARRAY_GOES_HERE'])
+        ->execute();
 }
 
 catch(CurlException $ce){
@@ -89,7 +89,7 @@ __Method signatures of all the methods/requests used in the package__
     `domToArray($node): mixed`
     
 
-If you are using `phpStorm IDE` then you don't have to check method signatures every time, 
+If you are using `PhpStorm IDE` then you don't have to check method signatures every time, 
 just go to the method, click it, then do `CTRL + Q` on it, everything that belongs to this method, will be shown.
 
 
@@ -149,5 +149,5 @@ Curl::Make()
 
 __Note (Precaution):__
 
-If you write any method that does not belong to the `curl-handler` or any parameter that `Curl::Make class` does not understand, then you will see the error messages.
+If you call any method that does not belong to the `OTIFSolutions\CurlHandler\Curl::class` or give any parameter that it does not understand, then you will see the error messages.
 
