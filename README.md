@@ -23,7 +23,7 @@ Namespace for the package class
 use OTIFSolutions\CurlHandler\Curl
 ```
 
-__Supported request methods__
+__Methods used with the package's curl class__
 
 `url('')`
 
@@ -40,7 +40,7 @@ getCurlErrors();    // used to display errors if any
 ``` 
 
 
-__Supported Request Types:__
+__Supported Request Methods:__
 
 `GET`
 
@@ -50,7 +50,8 @@ __Supported Request Types:__
 
 `DELETE`
 
-__How to use:__
+
+__How to use the package:__
 
 ```php
 
@@ -88,8 +89,9 @@ __Method signatures of all the methods/requests used in the package__
     `domToArray($node): mixed`
     
 
-If you are using `phpStorm IDE` then you don't have to check method signatures everytime, 
+If you are using `phpStorm IDE` then you don't have to check method signatures every time, 
 just go to the method, click it, then do `CTRL + Q` on it, everything that belongs to this method, will be shown.
+
 
 __Get request for API call__
 
