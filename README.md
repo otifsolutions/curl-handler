@@ -1,93 +1,151 @@
 # **Curl-Handler**
 
+An Easy to use Curl class. Allows single-line easy API calls.
+
 ### **Requirements**
 
-PHP 7 > PHP 7.4
+`PHP 7 > PHP 7.4`
 
-### **How to use the library**
+__How to use the Library__
 
-Install via the composer
+Install via Composer **[Composer](https://getcomposer.org/download)** (Recommended)
 
-Using the composer(Recomended)
+__Using Composer (Recommended)__
 
-Either run the following command in the root directory of your project:
+```
+Composer require otifsolutions/curl-handler
+```
 
-**composer require otifsolutions/curl-handler**
 
 Namespace for using class
 
-**use OTIFSolutions\CurlHandler\Curl;**
+```php 
+use OTIFSolutions\CurlHandler\Curl
+```
 
-### **Methods:**
+__Supported request methods__
 
-url('')
+`url('')`
 
-header([])
+`header([])`
 
-params([])
+`params([])`
 
-body([])
+`body([])`
 
-execute()
+`execute()`
 
-**getCurlErrors()** : use to display the errors
+```php
+getCurlErrors();    // used to display errors if any
+``` 
 
-### **Request Types:**
 
-GET 
+__Supported Request Types:__
 
-POST 
+`GET`
 
-PUT
+`POST` 
 
-DELETE
+`PUT`
 
-### **DEMO Use:**
+`DELETE`
+
+__How to use:__
+
+```php
+
+use OTIFSolutions\CurlHandler\Curl;
+use OTIFSolutions\CurlHandler\Exceptions\CurlException;
 
 try{
 
-Curl::Make()->ANY REQUEST TYPE->**url**('URL_GOES_HERE')->**header**(['AUTHENTICATION_ARRAY_GOES_HERE'])->**body**(['BODY_ARRAY_GOES_HERE'])->**params**(['PARAMS_ARRAY_GOES_HERE'])->**execute**() ;
-
+Curl::Make()
+    ->get() // this could be, get, post, put, delete
+    ->url('REQUEST_URL_GOES_HERE')
+    ->header(['AUTHENTICATION_ARRAY_GOES_HERE'])
+    ->body(['BODY_ARRAY_GOES_HERE'])
+    ->params(['PARAMETERS_ARRAY_GOES_HERE'])
+    ->execute();
 }
 
-catch(CurlException $e){
+catch(CurlException $ce){
+    return ($ce->getCurlErrors());
+}
 
-return ($e->getCurlErrors());
+```
+
+
+__Method signatures of all the methods/requests used in the package__  
+
+    `url('STRING') : Object`,
+    `header(['ARRAY']) : Object`,
+    `body(['ARRAY']) : Object`,
+    `params(['ARRAY]) : Object`,
+    `execute() : array`,
+    `getCurlErrors() : array`,
+    `isJson('string'): bool`,
+    `isDomDocument('string'): bool`,
+    `domToArray($node): mixed`
     
-}
 
+If you are using `phpStorm IDE` then you don't have to check method signatures everytime, 
+just go to the method, click it, then do `CTRL+Q` on it, everything that belongs to this method, will be shown
 
-### **Get request for api call**
+__Get request for API call__
 
-Curl class:: Curl::Make()->GET->**url**('URL_GOES_HERE')->**header**(['AUTHENTICATION_ARRAY_GOES_HERE'])->**params**(['PARAMS_ARRAY_GOES_HERE'])->**execute**()
+```php
+use OTIFSolutions\CurlHandler\Curl;
 
-**Methods Type** : url('STRING'),HEADER(['ARRAY']),PARAMS(['ARRAY])
+Curl::Make()
+    ->GET
+    ->url('URL_GOES_HERE')
+    ->header(['AUTHENTICATION_ARRAY_GOES_HERE'])
+    ->params(['PARAMS_ARRAY_GOES_HERE'])
+    ->execute();
+```
 
-**Error Detail** : if you write any wrong function name or value then system will display error message
+__Post request__
 
-### **Post request**
+```php
+use OTIFSolutions\CurlHandler\Curl;
 
-Curl class:: Curl::Make()->POST->**url**('URL_GOES_HERE')->**header**(['AUTHENTICATION_ARRAY_GOES_HERE'])->**body**(['BODY_ARRAY_GOES_HERE'])->**params**(['PARAMS_ARRAY_GOES_HERE'])->**execute**()
+Curl::Make()
+    ->POST
+    ->url('URL_GOES_HERE')
+    ->header(['AUTHENTICATION_ARRAY_GOES_HERE'])
+    ->body(['BODY_ARRAY_GOES_HERE'])
+    ->params(['PARAMS_ARRAY_GOES_HERE'])
+    ->execute();
+```
 
-**Methods Type** : url('STRING'),HEADER(['ARRAY']),BODY(['ARRAY']),PARAMS(['ARRAY])
+__Put Request__
 
-**Error Detail** : if you write any wrong function name or value then system will display error message
+```php
+use OTIFSolutions\CurlHandler\Curl;
 
-### **Put request**
+Curl::Make()
+    ->PUT
+    ->url('URL_GOES_HERE')
+    ->header(['AUTHENTICATION_ARRAY_GOES_HERE'])
+    ->body(['BODY_ARRAY_GOES_HERE'])
+    ->params(['PARAMS_ARRAY_GOES_HERE'])
+    ->execute();
+```
 
-Curl class:: Curl::Make()->PUT->url('URL_GOES_HERE')->header(['AUTHENTICATION_ARRAY_GOES_HERE'])->**body**(['BODY_ARRAY_GOES_HERE'])->**params**(['PARAMS_ARRAY_GOES_HERE'])->**execute**()
+__Delete request__
 
-**Methods Type** : url('STRING'),HEADER(['ARRAY']),BODY(['ARRAY']),PARAMS(['ARRAY])
+```php
+use OTIFSolutions\CurlHandler\Curl;
 
-**Error Detail** : if you write any wrong function name or value then system will display error message
+Curl::Make()
+    ->DELETE
+    ->url('URL_GOES_HERE')
+    ->header(['AUTHENTICATION_ARRAY_GOES_HERE'])
+    ->params(['PARAMS_ARRAY_GOES_HERE'])
+    ->execute();
+```
 
-### **Delete request**
+__Note (Precaution):__
 
-Curl class:: Curl::Make()->DELETE->**url**('URL_GOES_HERE')->**header**(['AUTHENTICATION_ARRAY_GOES_HERE'])->**params**(['PARAMS_ARRAY_GOES_HERE'])->**execute**()
+If you write any method that does not belong to the `curl-handler` or any parameter that `Curl::Make class` does not understand, then you will see the error messages.
 
-**Methods Type** : url('STRING'),HEADER(['ARRAY']),BODY(['ARRAY']),PARAMS(['ARRAY])
-
-**Error Detail** : if you write any wrong function name or value then system will display error message
-
-Details
-This pakage is used to for handling api call by using otifsolution culr handler Curl class.
