@@ -151,3 +151,8 @@ __Note (Precaution):__
 
 If you call any method that does not belong to the `OTIFSolutions\CurlHandler\Curl::class` or give any parameter that it does not understand, then you will see the error messages.
 
+__Realtime example you can check__
+
+This example demonstrates the usage of `curl-handleer` with `get` method, have a look at
+
+**[laravel-currency-layer/Commands/FetchCurrencyRates](https://github.com/otifsolutions/laravel-currency-layer/blob/main/src/Commands/FetchCurrencyRates.php)**
