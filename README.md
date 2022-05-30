@@ -4,7 +4,7 @@ An Easy to use Curl class. Allows single-line easy API calls.
 
 ### **Requirements**
 
-`PHP 7 > PHP 7.4`
+`PHP 7 > PHP 8.1`
 
 __How to use the Library__
 
@@ -17,7 +17,7 @@ Composer require otifsolutions/curl-handler
 ```
 
 
-Namespace for using class
+Namespace for the package class
 
 ```php 
 use OTIFSolutions\CurlHandler\Curl
@@ -89,7 +89,7 @@ __Method signatures of all the methods/requests used in the package__
     
 
 If you are using `phpStorm IDE` then you don't have to check method signatures everytime, 
-just go to the method, click it, then do `CTRL+Q` on it, everything that belongs to this method, will be shown
+just go to the method, click it, then do `CTRL + Q` on it, everything that belongs to this method, will be shown.
 
 __Get request for API call__
 
