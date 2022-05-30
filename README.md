@@ -61,7 +61,7 @@ use OTIFSolutions\CurlHandler\Exceptions\CurlException;
 try{
 
     Curl::Make()
-        ->get() // this could be, get, post, put, delete
+        ->get // this could be, get, post, put, delete
         ->url('REQUEST_URL_GOES_HERE')
         ->header(['AUTHENTICATION_ARRAY_GOES_HERE'])
         ->body(['BODY_ARRAY_GOES_HERE'])
