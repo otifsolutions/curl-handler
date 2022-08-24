@@ -18,9 +18,9 @@ class Curl
     {
         return new class($cookies){
             private string $url ;
-            private mixed $bodies ;
-            private array $headers ;
-            private mixed $params ;
+            private $bodies ;
+            private $headers ;
+            private $params ;
             private string $method ;
             private mixed $curl;
             private array $errors = [];
@@ -167,8 +167,11 @@ class Curl
                         CURLOPT_HTTPHEADER => $this->headers ?? [],
                         CURLOPT_POSTFIELDS => $this->bodies,
                         CURLOPT_HEADERFUNCTION => function($ch , $headerLine){
-                            if (preg_match('/^Set-Cookie:\s*([^;]*)/mi', $headerLine, $cookie) === 1) {
-                                $this->cookies[] = $cookie;
+                            if (preg_match('/^Set-Cookie:\s*([^;]*)/mi', $headerLine, $cookies) === 1) {
+                                foreach ($cookies as $cookie)
+                                {
+                                    $this->cookies[] = $cookie;
+                                }
                             }
                             return strlen($headerLine);
                         }
