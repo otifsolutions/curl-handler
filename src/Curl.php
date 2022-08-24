@@ -151,9 +151,10 @@ class Curl
             }
 
             /**
+             * @param array $cookies
              * @return array
              */
-            private function execute() : array
+            private function execute(array &$cookies = []) : array
             {
                 if(count($this->errors) === 0){
                     curl_setopt_array ( $this->curl, [
@@ -163,6 +164,12 @@ class Curl
                         CURLOPT_CUSTOMREQUEST => $this->method,
                         CURLOPT_HTTPHEADER => $this->headers ?? [],
                         CURLOPT_POSTFIELDS => $this->bodies,
+                        CURLOPT_HEADERFUNCTION => function($ch , $headerLine) use (&$cookies){
+                            if (preg_match('/^Set-Cookie:\s*([^;]*)/mi', $headerLine, $cookie) == 1) {
+                                $cookies[] = $cookie;
+                            }
+                            return strlen($headerLine);
+                        }
                     ]);
                     $response = curl_exec($this->curl);
                     if (curl_error($this->curl)){
