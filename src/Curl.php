@@ -22,7 +22,7 @@ class Curl
             private $headers ;
             private $params ;
             private string $method ;
-            private mixed $curl;
+            private $curl;
             private array $errors = [];
             private array $cookies;
 
@@ -56,7 +56,7 @@ class Curl
              *
              * @return mixed
              */
-            public function __call(mixed $func, mixed $arguments)
+            public function __call($func, $arguments)
             {
                 if ($func === 'url') {
                     return $this->url($arguments);
@@ -86,7 +86,7 @@ class Curl
              *
              * @return object
              */
-            private function url(mixed $url): object
+            private function url($url): object
             {
                 if(isset($url[0]) && is_string($url[0])){
                     $this->url = implode($url);
@@ -101,7 +101,7 @@ class Curl
              *
              * @return object
              */
-            private function header(mixed $headers): object
+            private function header($headers): object
             {
                 if(isset($headers[0]) && is_array($headers[0])){
                     if(count($headers[0])>0){
@@ -119,7 +119,7 @@ class Curl
              *
              * @return object
              */
-            private function body(mixed $bodies): object
+            private function body($bodies): object
             {
                 if(isset($bodies[0]) && is_array($bodies[0])){
                     if(count($bodies[0])>0){
@@ -139,7 +139,7 @@ class Curl
              *
              * @return object
              */
-            private function params(mixed $params): object
+            private function params($params): object
             {
                 if(isset($params[0]) && is_array($params[0])){
                     if(count($params[0])>0){
