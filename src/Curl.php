@@ -81,9 +81,10 @@ class Curl
                 }
 
                 if ($func === 'returnHeaders'){
-                    if (isset($params[0])) {
+                    if (isset($arguments[0])) {
                         $this->enableHeaders = true;
                     }
+                    return $this;
                 }
 
                 $this->errors[] = $func.'()'.' is not defined function';
@@ -198,8 +199,9 @@ class Curl
                                 $headers['http_code'] = $line;
                             else
                             {
-                                list ($key, $value) = explode(': ', $line);
-                                $headers[$key] = $value;
+                                $entry = explode(': ', $line);
+                                if (count($entry) === 2)
+                                    $headers[$entry[0]] = $entry[1];
                             }
                     }
                     if (curl_error($this->curl)){
@@ -222,7 +224,6 @@ class Curl
 
                     return $response;
                 }
-
                 throw new CurlException($this->errors);
             }
 
