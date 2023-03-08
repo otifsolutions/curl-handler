@@ -188,10 +188,19 @@ class Curl
                         curl_setopt($this->curl, CURLOPT_HEADER, 1);
                     }
                     $response = curl_exec($this->curl);
+                    $headers = [];
                     if ($this->enableHeaders){
                         $header_size = curl_getinfo($this->curl, CURLINFO_HEADER_SIZE);
                         $header = substr($response, 0, $header_size);
                         $response = substr($response, $header_size);
+                        foreach (explode("\r\n", $header) as $i => $line)
+                            if ($i === 0)
+                                $headers['http_code'] = $line;
+                            else
+                            {
+                                list ($key, $value) = explode(': ', $line);
+                                $headers[$key] = $value;
+                            }
                     }
                     if (curl_error($this->curl)){
                         $this->errors[] = 'Internal error occured';
@@ -207,7 +216,7 @@ class Curl
 
                     if ($this->enableHeaders){
                         $response =  [
-                            'headers' => $header ?? null,
+                            'headers' => $headers,
                             'body' => $response
                         ];
                     }
