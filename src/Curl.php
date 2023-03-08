@@ -209,10 +209,9 @@ class Curl
                     if (Helper::isJson($response)) {
                         $response =  json_decode($response, true, 512, JSON_THROW_ON_ERROR);
                     }
-
-                    $response =  Helper::isDOMDocument($response) ? Helper::domToArray($response) : [
-                        'body' => $response
-                    ];
+                    if (Helper::isDOMDocument($response)){
+                        $response = Helper::domToArray($response);
+                    }
 
                     if ($this->enableHeaders){
                         $response =  [
