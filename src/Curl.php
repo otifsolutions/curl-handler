@@ -26,6 +26,8 @@ class Curl
             private array $errors = [];
             private array $cookies;
 
+            private $enableHeaders = false;
+
             public function __construct(&$cookies){
                 $this->curl = curl_init();
                 $this->cookies = &$cookies;
@@ -76,6 +78,12 @@ class Curl
 
                 if($func === 'execute') {
                     return $this->execute();
+                }
+
+                if ($func === 'returnHeaders'){
+                    if (isset($params[0])) {
+                        $this->enableHeaders = true;
+                    }
                 }
 
                 $this->errors[] = $func.'()'.' is not defined function';
@@ -176,18 +184,35 @@ class Curl
                             return strlen($headerLine);
                         }
                     ]);
+                    if ($this->enableHeaders){
+                        curl_setopt($this->curl, CURLOPT_HEADER, 1);
+                    }
                     $response = curl_exec($this->curl);
+                    if ($this->enableHeaders){
+                        $header_size = curl_getinfo($this->curl, CURLINFO_HEADER_SIZE);
+                        $header = substr($response, 0, $header_size);
+                        $response = substr($response, $header_size);
+                    }
                     if (curl_error($this->curl)){
                         $this->errors[] = 'Internal error occured';
                         throw new CurlException($this->errors);
                     }
                     if (Helper::isJson($response)) {
-                        return json_decode($response, true, 512, JSON_THROW_ON_ERROR);
+                        $response =  json_decode($response, true, 512, JSON_THROW_ON_ERROR);
                     }
 
-                    return Helper::isDOMDocument($response) ? Helper::domToArray($response) : [
+                    $response =  Helper::isDOMDocument($response) ? Helper::domToArray($response) : [
                         'body' => $response
                     ];
+
+                    if ($this->enableHeaders){
+                        $response =  [
+                            'headers' => $header ?? null,
+                            'body' => $response
+                        ];
+                    }
+
+                    return $response;
                 }
 
                 throw new CurlException($this->errors);
