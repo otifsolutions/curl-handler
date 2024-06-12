@@ -75,6 +75,12 @@ class Curl
                 if ($func === 'params') {
                     return $this->params($arguments);
                 }
+                if ($func === 'referer') {
+                    return $this->referer($arguments);
+                }
+                if ($func === 'agent') {
+                    return $this->agent($arguments);
+                }
 
                 if($func === 'execute') {
                     return $this->execute();
@@ -120,6 +126,37 @@ class Curl
 
                 else{
                     $this->errors[] = 'Header data must be an array';
+                }
+                return $this;
+            }
+
+            /**
+             * @param mixed $referer
+             *
+             * @return object
+             */
+            private function referer($referer): object
+            {
+                if(isset($referer[0]) && is_string($referer[0])){
+                     curl_setopt($this->curl, CURLOPT_REFERER, implode($referer));
+                }
+                else{
+                    $this->errors[] = 'referer must be a string';
+                }
+                return $this;
+            }
+            /**
+             * @param mixed $agent
+             *
+             * @return object
+             */
+            private function agent($agent): object
+            {
+                if(isset($agent[0]) && is_string($agent[0])){
+                    curl_setopt($this->curl, CURLOPT_USERAGENT, implode($agent));
+                }
+                else{
+                    $this->errors[] = 'agent must be a string';
                 }
                 return $this;
             }

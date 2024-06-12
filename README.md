@@ -33,6 +33,10 @@ __Methods used with the package's curl class__
 
 `body([])`
 
+`referer('')`
+
+`agent('')`
+
 `execute()`
 
 ```php
@@ -61,10 +65,12 @@ use OTIFSolutions\CurlHandler\Exceptions\CurlException;
 try{
 
     Curl::Make()
-        ->get // this could be, get, post, put, delete
+        ->GET // this could be, get, post, put, delete
         ->url('REQUEST_URL_GOES_HERE')
         ->header(['AUTHENTICATION_ARRAY_GOES_HERE'])
         ->body(['BODY_ARRAY_GOES_HERE'])
+        ->referer('https://www.google.com')
+        ->agent('Mozilla/5.0 (Windows NT 6.1; WOW64; rv:7.0.1) Gecko/20100101 Firefox/7.0.12011-10-16 20:23:00')
         ->params(['PARAMETERS_ARRAY_GOES_HERE'])
         ->execute();
 }
@@ -82,6 +88,8 @@ __Method signatures of all the methods/requests used in the package__
     `header(['ARRAY']) : Object`,
     `body(['ARRAY']) : Object`,
     `params(['ARRAY]) : Object`,
+    `referer('STRING') : Object`,
+    `agent('STRING') : Object`,
     `execute() : array`,
     `getCurlErrors() : array`,
     `isJson('string'): bool`,
