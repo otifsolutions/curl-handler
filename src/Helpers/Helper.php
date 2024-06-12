@@ -30,7 +30,9 @@ class Helper
     {
         $xml = new \DOMDocument();
         try{
-            return $xml->loadXML($string) !== FALSE;
+            if (is_string($string))
+                return $xml->loadXML($string) !== FALSE;
+            return FALSE;
         }catch (\Exception $ex){
             return FALSE;
         }
